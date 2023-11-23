@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sketch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+
+    <button class="colorBox colorBoxSelected" id="black"></button>
+    <button class="colorBox" id="grey"></button>
+    <button class="colorBox" id="white"></button>
+    <button class="colorBox" id="red"></button>
+    <button class="colorBox" id="yellow"></button>
+    <button class="colorBox" id="green"></button>
+    <button class="colorBox" id="blue"></button>
+    <button class="colorBox" id="purple"></button>
+    <button class="colorBox" id="brown"></button>
+    <button class="colorBox" id="rainbow"></button>
+    
+    <div class="grid-size right">
+      <label for="rangeInput" id="rangeCaption">Current grid: </label>
+      <input type="range" id="rangeInput" min="4" max="100" step="1" value="16">
+    </div>
+
+    <button class="btn right" id="grid">Show Grid</button>
+    <button class="btn" id="reset">Reset your drawing</button>
+
+  </header>
+  
+  <div class="gridContainer">
+  </div>
+  
+  <script src="script.js"></script>
+  
+</body>
+</html>

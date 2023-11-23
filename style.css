@@ -1,0 +1,198 @@
+:root {
+  --gridItemSize: 6.25%;
+  --gridBorderRadius: 0px;
+  --randomColor: black;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-family: 13px;
+}
+
+body {
+  background-color: rgb(215,215,215);
+}
+
+button {
+  border: none;
+  background-color: rgb(215,215,215);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+header {
+  position: absolute;
+  top: 0px;
+  width: calc(100% - 40px);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+  margin: 10px;
+  border-radius: 10px;
+  background-color: rgb(235,235,235);
+}
+
+.gridContainer {
+  background-color: white;
+  height: 80vh;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-top: 10vh;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: px 0px 20px 0px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
+}
+
+.gridItem {
+  box-sizing: border-box;
+  background-color: white;
+  flex: 1;
+  flex-shrink: 0;
+  flex-basis: var(--gridItemSize);
+  height: var(--gridItemSize);
+  border-radius: var(--gridBorderRadius);
+}
+
+.grid-size {
+  border-radius: 5px;
+  background-color: rgb(215,215,215);
+  height: 35px;
+  width: 275px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+}
+
+.btn {
+  border-radius: 5px;
+  background-color: rgb(215,215,215);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: white;
+}
+
+.showGrid {
+  border: 0.5px solid lightgray;
+}
+
+.colored {
+  background-color: var(--color);
+}
+
+#grid {
+  min-width: 90px;
+  min-height: 35px;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.colorBox {
+  height: 35px;
+  width: 35px;
+  border-radius: 40px;
+  margin: 0px;
+}
+
+.colorBoxSelected {
+  border: 1.5px solid white;
+  outline: 1.5px solid black;
+}
+
+#grid {
+  margin-right: 10px;
+}
+
+#black,
+#grey,
+#white,
+#red,
+#yellow,
+#green,
+#blue,
+#purple,
+#brown {
+  margin-right: 5px;
+}
+
+#black,
+.black {
+  background-color: black;
+}
+
+#grey,
+.grey {
+  background-color: rgb(127, 127, 127);
+}
+
+#white,
+.white {
+  background-color: white;
+}
+
+#red,
+.red {
+  background-color: rgb(217, 37, 17);
+}
+
+#yellow,
+.yellow {
+  background-color: rgb(245, 193, 22);
+}
+
+#green,
+.green {
+  background-color: rgb(54, 161, 32);
+}
+
+#blue,
+.blue {
+  background-color: rgb(37, 119, 207);
+}
+
+#purple,
+.purple {
+  background-color: rgb(159, 37, 219);
+}
+
+#brown,
+.brown {
+  background-color: rgb(140, 92, 53);
+}
+
+#rainbow {
+  background: linear-gradient(135deg, Red, Orange, Yellow, Green, Blue, Indigo,Violet);
+}
+
+input[type=range] {
+  height: 5px;
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 15px;
+  background: rgb(127, 127, 127);
+  cursor: pointer;
+  -webkit-appearance: none;
+  transition: 0.3s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  background-color: white;
+  border: 1px solid rgb(127, 127, 127);
+}
