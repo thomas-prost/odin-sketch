@@ -19,18 +19,26 @@ function updateRangeCaption() {
   rangeCaption.textContent = "Current Grid: " + box + " \u00d7 " + box;
 }
 
+gridContainer.addEventListener("mousedown", handleMouseDown);
+gridContainer.addEventListener("dragstart", (e) => {
+  e.preventDefault();
+  return false;
+})
+gridContainer.addEventListener("mouseleave", handleMouseUp);
+document.body.addEventListener("mouseup", handleMouseUp);
+
+
 // Init grid
 function initGrid(box) {
+
   for (let i = 0; i < box * box; i++) {
     const createGridItem = document.createElement("div");
     createGridItem.classList.add("gridItem");
-    createGridItem.addEventListener("mousedown", handleMouseDown);
-    createGridItem.addEventListener("mouseup", handleMouseUp);
     createGridItem.addEventListener("mouseover", handleMouseOver);
-    document.documentElement.style.setProperty("--gridItemSize", 100 / box + "%");
     gridContainer.appendChild(createGridItem);
-    updateRangeCaption();
   };
+  document.documentElement.style.setProperty("--gridItemSize", 100 / box + "%");
+  updateRangeCaption();
 };
 
 // Random RGB generator
@@ -50,7 +58,7 @@ function removeGrid() {
   while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild);
   }
-  btnGrid.textContent = "Show Grid";
+  // btnGrid.classList.add("visible")
 }
 
 // Setup Colorbox
@@ -71,7 +79,7 @@ colorBoxes.forEach((button) => {
 });
 
 // Re-init grid with new box value
-rangeInput.addEventListener("input", () => {
+rangeInput.addEventListener("change", () => {
   removeGrid();
   box = rangeInput.value;
   initGrid(box);
@@ -96,6 +104,7 @@ function handleMouseDown(event) {
 }
 
 function handleMouseUp() {
+  console.log("exit")
   isDrawing = false
 }
 
@@ -112,15 +121,17 @@ function handleMouseOver(event) {
 }
 
 // Show or Hide grid
-function toggleGrid() {
-  const gridItemExisting  = document.querySelectorAll(".gridItem");
-  const btnGridText = btnGrid.textContent;
-  gridItemExisting.forEach(gridItem => {
-    gridItem.classList.toggle("showGrid");
-  });
-  btnGrid.textContent = btnGridText === "Show Grid" ? "Hide Grid" : "Show Grid";
+function toggleGridVisibility() {
+
+  // const gridItemExisting = document.querySelectorAll(".gridItem");
+  // gridItemExisting.forEach(gridItem => {
+  //   gridItem.classList.toggle("showGrid");
+  // });
+  gridContainer.classList.toggle("showGrid");
+  btnGrid.classList.toggle("visible")
+
 }
-btnGrid.addEventListener("click", toggleGrid);
+btnGrid.addEventListener("click", toggleGridVisibility);
 
 // Init grid on loading
 window.onload = () => {
