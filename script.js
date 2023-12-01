@@ -1,5 +1,7 @@
 const DEFAULT_GRID = 16;
 const DEFAULT_COLOR = "black";
+const MAX_GRID = 100;
+const MAX_GRID_ITEMS = 10000;
 
 const gridContainer = document.querySelector(".gridContainer");
 const gridItem = document.querySelectorAll(".gridItem");
@@ -8,6 +10,9 @@ const btnGrid = document.querySelector("#grid");
 const rangeInput = document.querySelector("#rangeInput");
 const rangeCaption = document.querySelector("#rangeCaption");
 const colorBoxes = document.querySelectorAll(".colorBox");
+const colMode = document.querySelector("#colMode");
+const colInfo = document.querySelector("#colInfo");
+const rowInfo = document.querySelector("#rowInfo");
 
 let box = DEFAULT_GRID;
 let color = DEFAULT_COLOR;
@@ -15,30 +20,46 @@ let boxNumber = box * box;
 let isDrawing = false;
 let isColorRandom = false;
 
-function updateRangeCaption() {
-  rangeCaption.textContent = "Current Grid: " + box + " \u00d7 " + box;
-}
-
+reset.addEventListener("click", erase);
+btnGrid.addEventListener("click", toggleGridVisibility);
+colMode.addEventListener("click", toggleColMode);
 gridContainer.addEventListener("mousedown", handleMouseDown);
+gridContainer.addEventListener("mouseleave", handleMouseUp);
+document.body.addEventListener("mouseup", handleMouseUp);
 gridContainer.addEventListener("dragstart", (e) => {
   e.preventDefault();
   return false;
-})
-gridContainer.addEventListener("mouseleave", handleMouseUp);
-document.body.addEventListener("mouseup", handleMouseUp);
+});
 
+// Define grid setting
+function updateRangeCaption() {
+  rangeCaption.textContent = "Current Grid: " + box + " \u00d7 " + box;
+};
 
-// Init grid
+// Grid first Init
 function initGrid(box) {
-
-  for (let i = 0; i < box * box; i++) {
+  for (let i = 1; i <= MAX_GRID_ITEMS; i++) {
     const createGridItem = document.createElement("div");
+    const itemId = i.toString().padStart(5, '0');
+    createGridItem.id = itemId;
     createGridItem.classList.add("gridItem");
     createGridItem.addEventListener("mouseover", handleMouseOver);
     gridContainer.appendChild(createGridItem);
   };
   document.documentElement.style.setProperty("--gridItemSize", 100 / box + "%");
   updateRangeCaption();
+  gridUpdate(box);
+};
+
+// Grid Update
+function gridUpdate(box) {
+  const startIndex = box * box;
+  const childrenArray = Array.from(gridContainer.children);
+  const childrenToHide = childrenArray.slice(startIndex);
+  for (const child of childrenToHide) {
+    child.classList.add("boxHidden");
+  }
+  document.documentElement.style.setProperty("--gridItemSize", 100 / box + "%");
 };
 
 // Random RGB generator
@@ -53,12 +74,15 @@ function generateRGB() {
   return r + "," + g + "," + b;
 }
 
+function toggleColMode() {
+  
+}
+
 // Avoid multiple grids
 function removeGrid() {
   while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild);
   }
-  // btnGrid.classList.add("visible")
 }
 
 // Setup Colorbox
@@ -80,21 +104,28 @@ colorBoxes.forEach((button) => {
 
 // Re-init grid with new box value
 rangeInput.addEventListener("change", () => {
-  removeGrid();
   box = rangeInput.value;
-  initGrid(box);
+  updateRangeCaption();
+  resetGrid();
+  gridUpdate(box);
 });
+
+function resetGrid() {
+  const hiddenChildren = document.querySelectorAll(".boxHidden");
+  hiddenChildren.forEach(child => {
+    child.classList.remove("boxHidden");
+  });
+};
 
 // Erase drawing
 function erase() {
   removeGrid();
   initGrid(box);
 }
-reset.addEventListener("click", erase);
 
-function handleMouseDown(event) {
-  isDrawing = true;
-  event.target.classList.remove("black", "grey", "white", "red", "yellow", "green", "blue", "purple", "brown");
+function draw(event) {
+  event.target.classList.remove(
+    "black", "grey", "white", "red", "yellow", "green", "blue", "purple", "brown");
   if (isColorRandom == true) {
     event.target.style.backgroundColor = "rgb(" + generateRGB() + ")";
   } else {
@@ -103,37 +134,46 @@ function handleMouseDown(event) {
   }
 }
 
-function handleMouseUp() {
-  console.log("exit")
-  isDrawing = false
+function handleMouseDown(event) {
+  isDrawing = true;
+  draw(event);
+  getCoord(event);
+}
+
+function handleMouseUp(event) {
+  isDrawing = false;
+  getCoord(event);
 }
 
 function handleMouseOver(event) {
   if (isDrawing == true) {
-    event.target.classList.remove("black", "grey", "white", "red", "yellow", "green", "blue", "purple", "brown");
-    if (isColorRandom == true) {
-      event.target.style.backgroundColor = "rgb(" + generateRGB() + ")";
-    } else {
-      event.target.removeAttribute("style");
-      event.target.classList.add(color);
-    }
+    draw(event);
   }
+  getCoord(event);
 }
+
+function getCoord(event) {
+  const uniqueId = event.target.id;
+  const row = Math.floor((uniqueId - 1)/ box) + 1;
+  const column = Math.floor((uniqueId - 1)% box) + 1;
+  colInfo.textContent = "Column: " + column;
+  rowInfo.textContent = "Row: " + row;
+  console.log("ID: " + uniqueId);
+  console.log("Row: " + row);
+  console.log("Column: " + column);
+};
 
 // Show or Hide grid
 function toggleGridVisibility() {
-
-  // const gridItemExisting = document.querySelectorAll(".gridItem");
-  // gridItemExisting.forEach(gridItem => {
-  //   gridItem.classList.toggle("showGrid");
-  // });
   gridContainer.classList.toggle("showGrid");
   btnGrid.classList.toggle("visible")
-
 }
-btnGrid.addEventListener("click", toggleGridVisibility);
 
 // Init grid on loading
 window.onload = () => {
   initGrid(box)
 }
+
+function test() {
+  console.log("bravo!")
+};
