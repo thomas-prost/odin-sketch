@@ -39,6 +39,12 @@ header {
   background-color  : rgb(235, 235, 235);
 }
 
+.gridMinus,
+.gridPlus {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .boxHidden {
   display: none;
 }
