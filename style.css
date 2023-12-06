@@ -1,7 +1,6 @@
 :root {
   --gridItemSize    : 6.25%;
   --gridBorderRadius: 0px;
-  --randomColor     : black;
 }
 
 * {
@@ -61,7 +60,7 @@ header {
 }
 
 .gridContainer.showGrid .gridItem {
-  border: 0.5px solid lightgray;
+  outline: 1px solid lightgray;
 }
 
 .gridItem {
@@ -74,7 +73,7 @@ header {
   border-radius   : var(--gridBorderRadius);
 }
 
-.grid-size {
+.grid-range {
   border-radius   : 5px;
   background-color: rgb(215, 215, 215);
   height          : 35px;
@@ -90,6 +89,8 @@ header {
   border-radius   : 5px;
   background-color: rgb(215, 215, 215);
   transition      : 0.3s;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .btn:hover {
@@ -102,7 +103,6 @@ header {
 }
 
 #grid {
-  /* min-width: 90px; */
   min-height: 35px;
   position  : relative;
   padding   : 10px;
@@ -130,9 +130,6 @@ header {
   opacity: 0;
 }
 
-
-
-
 .right {
   margin-left: auto;
 }
@@ -144,7 +141,7 @@ header {
   margin       : 0px;
 }
 
-.colorBoxSelected {
+.boxSelected {
   border : 1.5px solid white;
   outline: 1.5px solid black;
 }
@@ -158,9 +155,17 @@ header {
   background-color: black;
 }
 
+.border-black {
+  border: 5px solid black;
+}
+
 #grey,
 .grey {
   background-color: rgb(127, 127, 127);
+}
+
+.border-grey {
+  border: 5px solid rgb(127, 127, 127);
 }
 
 #white,
@@ -168,9 +173,17 @@ header {
   background-color: white;
 }
 
+.border-white {
+  border: 5px solid white;
+}
+
 #red,
 .red {
   background-color: rgb(217, 37, 17);
+}
+
+.border-red {
+  border: 5px solid rgb(217, 37, 17);
 }
 
 #yellow,
@@ -178,9 +191,17 @@ header {
   background-color: rgb(245, 193, 22);
 }
 
+.border-yellow {
+  border: 5px solid rgb(245, 193, 22);
+}
+
 #green,
 .green {
   background-color: rgb(54, 161, 32);
+}
+
+.border-green {
+  border: 5px solid rgb(54, 161, 32);
 }
 
 #blue,
@@ -188,14 +209,26 @@ header {
   background-color: rgb(37, 119, 207);
 }
 
+.border-blue {
+  border: 5px solid rgb(37, 119, 207);
+}
+
 #purple,
 .purple {
   background-color: rgb(159, 37, 219);
 }
 
+.border-purple {
+  border: 5px solid rgb(159, 37, 219);
+}
+
 #brown,
 .brown {
   background-color: rgb(140, 92, 53);
+}
+
+.border-brown {
+  border: 5px solid rgb(140, 92, 53);
 }
 
 #rainbow {

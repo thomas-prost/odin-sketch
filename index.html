@@ -11,13 +11,13 @@
 </head>
 
 <body>
-
+  <p class="data-info" id="idInfo">ID: </p>
   <p class="data-info" id="colInfo">Column: </p>
   <p class="data-info" id="rowInfo">Row: </p>
 
   <header>
 
-    <button class="colorBox colorBoxSelected"
+    <button class="colorBox boxSelected"
             id="black"></button>
     <button class="colorBox"
             id="grey"></button>
@@ -37,9 +37,22 @@
             id="brown"></button>
     <button class="colorBox"
             id="rainbow"></button>
-    <button class="btn right" id="colMode">Column Mode</button>
+    <button class="colorBox"
+            id="borderReset"></button>
 
-    <div class="grid-size right">
+    <button class="fillMode btn tool right boxSelected"
+            id="background">Background</button>
+    <button class="fillMode btn tool"
+            id="border">Border</button>
+
+    <button class="brushMode btn tool right boxSelected"
+            id="cell">Cell Brush</button>
+    <button class="brushMode btn tool"
+            id="col">Column Brush</button>
+    <button class="brushMode btn tool"
+            id="row">Row Brush</button>
+
+    <div class="grid-range right">
       <label for="rangeInput"
              id="rangeCaption">Current grid: </label>
       <input type="range"
